@@ -1,0 +1,72 @@
+<div class="container mt-5 shadow">
+  <h2 class="mb-4 text-center">Appointments Dashboard</h2>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <button 
+      [disabled]="currentBarberIndex === 0" 
+      class="btn btn-secondary" 
+      (click)="previousBarber()">&larr;
+    </button>
+    <h3>{{ currentBarber?.name }}</h3>
+    <button 
+      [disabled]="currentBarberIndex === barbers.length - 1" 
+      class="btn btn-secondary" 
+      (click)="nextBarber()">&rarr;
+    </button>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="btn btn-secondary" (click)="previousDate()">&larr;</button>
+    <h4>{{ selectedDate | date: 'fullDate' }}</h4>
+    <button class="btn btn-secondary" (click)="nextDate()">&rarr;</button>
+  </div>
+
+  <ng-container *ngIf="timeSlots.length; else noTimeSlots">
+    <table class="table table-bordered shadow-sm" *ngIf="timeSlots[0] !== 'This day is off'">
+      <thead class="table-dark">
+        <tr>
+          <th>Time</th>
+          <th>Appointment Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let slot of timeSlots">
+          <td class="text-center">{{ slot }}</td>
+          <td>
+            <div *ngIf="isSlotTaken(slot); else noAppointment" class="text-center">
+              <p><strong>Name:</strong> {{ getAppointment(slot)?.user?.firstName }} {{ getAppointment(slot)?.user?.lastName }}</p>
+              <p><strong>Email:</strong> {{ getAppointment(slot)?.user?.email }}</p>
+              <p><strong>Phone:</strong> {{ getAppointment(slot)?.user?.phone }}</p>
+              <p><strong>Service:</strong> {{ getAppointment(slot)?.service?.name }}</p>
+              <p><strong>Created At:</strong> {{ getAppointment(slot)?.createdAt | date: 'yyyy-MM-dd HH:mm' }}</p>
+              <p *ngIf="getAppointment(slot)?.completedAt"><strong>Completed At:</strong> {{ getAppointment(slot)?.completedAt | date: 'yyyy-MM-dd HH:mm' }}</p>
+              <div *ngIf="getAppointment(slot)?.status === 'completed'" class="alert alert-info" role="alert">
+                Completed
+              </div>
+              <div *ngIf="getAppointment(slot)?.status !== 'completed'">
+                <button class="btn btn-danger btn-sm me-1" (click)="cancelAppointment(getAppointment(slot)?._id!)">Cancel</button>
+                <button 
+                  class="btn btn-warning btn-sm" 
+                  (click)="completeAppointment(getAppointment(slot)?._id!)" 
+                  [disabled]="!canComplete(slot, selectedDate)">
+                  Complete
+              </button>
+              </div>
+            </div>
+            <ng-template #noAppointment>
+              <p class="text-muted">No appointment</p>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div *ngIf="timeSlots[0] === 'This day is off'" class="text-center alert alert-danger">
+      This day is off
+    </div>
+  </ng-container>
+
+  <ng-template #noTimeSlots>
+    <p class="text-center alert alert-warning">No time slots available.</p>
+  </ng-template>
+</div>

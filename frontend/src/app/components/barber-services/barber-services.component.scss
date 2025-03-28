@@ -1,0 +1,19 @@
+@use "sass:color";
+@use "../../../styles" as *;
+
+.container {
+  padding: 2rem;
+  border-radius: 0.5rem;
+
+  .form-label {
+    font-weight: bold;
+  }
+
+  .table {
+    th,
+    td {
+      padding: 1rem;
+      text-align: center;
+    }
+  }
+}

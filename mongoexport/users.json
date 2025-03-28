@@ -1,0 +1,2 @@
+{"_id":{"$oid":"67a5bf74fa0993d34606c0ef"},"firstName":"Admin","lastName":"User","email":"admin@barbershop.com","phone":"+385955813567","password":"$2a$10$mD6ac6IBeAK.aoMumMbSa.L/LiKE/YJP5936/V4xVV2yRkT/BjyzO","role":"admin","__v":0}
+{"_id":{"$oid":"67a69695b55c38eda825b0a6"},"firstName":"Leon","lastName":"Knežević","email":"leon123@gmail.com","phone":"+385955813567","password":"$2a$10$RSkDOyGfdmGXzJ5BAdVftOc7SjD8qqWQ5KhT/1O2QH9wY8E6fYi6m","role":"user","__v":0}

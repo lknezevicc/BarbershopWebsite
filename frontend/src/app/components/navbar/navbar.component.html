@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">
+      <i class="fas fa-cut"></i> Barbershop
+    </a>
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/services" routerLinkActive="active">
+            <i class="fas fa-money-bill-wave"></i> Price List
+          </a>
+        </li>
+        
+        <li *ngIf="isLoggedIn()" class="nav-item">
+          <a *ngIf="!isAdmin()" class="nav-link" routerLink="/booking" routerLinkActive="active">
+            <i class="fas fa-calendar-alt"></i> Appointments
+          </a>
+          <a *ngIf="isAdmin()" class="nav-link" routerLink="/admin/appointments" routerLinkActive="active">
+            <i class="fas fa-calendar-alt"></i> View Appointments
+          </a>
+        </li>
+
+        <li *ngIf="isAdmin()" class="nav-item">
+          <a class="nav-link" routerLink="admin/barbers" routerLinkActive="active">
+            <i class="fas fa-user-tie"></i> Barbers
+          </a>
+        </li>
+        <li *ngIf="isAdmin()" class="nav-item">
+          <a class="nav-link" routerLink="admin/services" routerLinkActive="active">
+            <i class="fas fa-concierge-bell"></i> Services
+          </a>
+        </li>
+        <li *ngIf="isAdmin()" class="nav-item">
+          <a class="nav-link" routerLink="admin/users" routerLinkActive="active">
+            <i class="fas fa-users"></i> Users
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li *ngIf="!isLoggedIn()" class="nav-item">
+          <a class="nav-link" routerLink="/auth/login" routerLinkActive="active">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </a>
+        </li>
+        <li *ngIf="isLoggedIn() && !isAdmin()" class="nav-item">
+          <a class="nav-link" [routerLink]="['user-profile/', getUserId()]" routerLinkActive="active">
+            <i class="fas fa-user"></i> Profile
+          </a>
+        </li>
+        <li *ngIf="isLoggedIn()" class="nav-item">
+          <a class="nav-link" href="#" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

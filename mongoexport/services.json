@@ -1,0 +1,10 @@
+{"_id":{"$oid":"67a5bfc0fa0993d34606c0f8"},"name":"Classic Haircut","description":"Traditional haircut with careful styling to match your look.","price":15,"__v":0}
+{"_id":{"$oid":"67a5c031fa0993d34606c0fd"},"name":"Fade Haircut","description":"Modern haircut with precise transitions for a fresh look.","price":18,"__v":0}
+{"_id":{"$oid":"67a5c046fa0993d34606c101"},"name":"Head Shaving","description":"Professional head shave with a finishing skin treatment.","price":10,"__v":0}
+{"_id":{"$oid":"67a5c05afa0993d34606c105"},"name":"Hair Bleaching","description":"Lightening hair with premium products for a modern look.","price":20,"__v":0}
+{"_id":{"$oid":"67a5c06dfa0993d34606c109"},"name":"Beard Grooming","description":"Precise shaping and care for your beard.","price":11,"__v":0}
+{"_id":{"$oid":"67a5c088fa0993d34606c10d"},"name":"Face Shaving","description":"Classic straight razor shave for a smooth feel.","price":11,"__v":0}
+{"_id":{"$oid":"67a5c09efa0993d34606c111"},"name":"New Age Shaving","description":"Innovative shaving treatment with aromatherapy and hot towels.","price":17,"__v":0}
+{"_id":{"$oid":"67a5c0bbfa0993d34606c115"},"name":"\"Neat Look\" Package","description":"Includes: hair removal (nose/ear/between eyebrows), eyebrow shaping, and cheek hair removal. Perfect for a quick refresh and a neat look, ideal for business occasions and special events.","price":15,"__v":0}
+{"_id":{"$oid":"67a5c100fa0993d34606c11a"},"name":"\"Face Comes First\" Package","description":"A deep treatment that improves skin texture, removes fatigue, and restores freshness. Includes: active peeling, facial massage, and a clay treatment.","price":15,"__v":0}
+{"_id":{"$oid":"67a5c120fa0993d34606c11e"},"name":"\"Premium Care\" Package","description":"Complete facial care that hydrates, detoxifies, and sculpts for a premium look. Includes: eyebrow shaping, facial massage, clay treatment, and Energy Force ampoule.","price":20,"__v":0}

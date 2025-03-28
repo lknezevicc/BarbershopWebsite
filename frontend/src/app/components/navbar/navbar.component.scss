@@ -1,0 +1,65 @@
+@use 'sass:color';
+
+$text-color: #f8f9fa;
+$accent-color: #d4af37;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+
+  .navbar-brand {
+    color: $text-color;
+    font-weight: bold;
+
+    i {
+      color: $accent-color;
+    }
+
+    &:hover {
+      color: color.scale($text-color, $lightness: -15%);
+    }
+  }
+
+  .navbar-nav .nav-link {
+    color: $text-color;
+
+    i {
+      color: $accent-color;
+    }
+
+    &:hover {
+      color: color.scale($text-color, $lightness: -15%);
+    }
+
+    &.active {
+      color: $accent-color;
+    }
+  }
+
+  .navbar-collapse {
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 991px) {
+    .navbar-nav {
+      text-align: center;
+      width: 100%;
+    }
+
+    .navbar-nav .nav-item {
+      width: 100%;
+    }
+
+    .navbar-nav .nav-link {
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .navbar-nav .nav-link {
+      font-size: 1rem;
+    }
+  }
+}

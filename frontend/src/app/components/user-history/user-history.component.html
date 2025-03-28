@@ -1,0 +1,46 @@
+<div class="container mt-5 shadow">
+  <h3 class="mb-4 text-center">{{ user?.firstName }}'s Reservation History</h3>
+  <select class="form-select mb-3" [(ngModel)]="filterText">
+    <option value="">All</option>
+    <option value="booked">Booked</option>
+    <option value="cancelled">Cancelled</option>
+    <option value="done">Completed</option>
+  </select>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class="table-dark text-center">
+        <tr>
+          <th (click)="setSortField('date')">Date</th>
+          <th (click)="setSortField('slot')">Time</th>
+          <th (click)="setSortField('service.name')">Service</th>
+          <th (click)="setSortField('status')">Status</th>
+          <th (click)="setSortField('createdAt')">Creation Date</th>
+          <th *ngIf="isAdmin()" (click)="setSortField('cancelledAt')">Cancellation Date</th>
+          <th *ngIf="isAdmin()" (click)="setSortField('completedAt')">Completion Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr *ngIf="(appointments | filter:filterText:'status' | sort:sortField:sortOrder).length === 0">
+          <td colspan="8">No appointments found</td>
+        </tr>
+        <tr *ngFor="let appointment of (appointments | filter:filterText:'status' | sort:sortField:sortOrder)">
+          <td>{{ appointment.date | date: 'fullDate' }}</td>
+          <td>{{ appointment.slot }}</td>
+          <td>{{ appointment.service.name }}</td>
+          <td>{{ appointment.status }}</td>
+          <td>{{ appointment.createdAt | date: 'yyyy-MM-dd HH:mm' }}</td>
+          <td *ngIf="isAdmin()"> {{ appointment.cancelledAt ? (appointment.cancelledAt | date: 'yyyy-MM-dd HH:mm') : 'Not cancelled' }} </td>
+          <td *ngIf="isAdmin()"> {{ appointment.completedAt ? (appointment.completedAt | date: 'yyyy-MM-dd HH:mm') : 'Not completed' }} </td>
+          <td *ngIf="appointment.status === 'booked' && isAdmin()">
+            <button class="btn btn-danger btn-sm me-1 mb-1" (click)="cancelAppointment(appointment._id)">Cancel</button>
+            <button class="btn btn-primary btn-sm me-1 mb-1" [disabled]="!canComplete(appointment.slot, appointment.date)" (click)="completeAppointment(appointment._id)">Complete</button>
+          </td>
+          <td *ngIf="appointment.status === 'booked' && !isAdmin()">
+            <button class="btn btn-danger btn-sm" (click)="cancelAppointment(appointment._id)">Cancel</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

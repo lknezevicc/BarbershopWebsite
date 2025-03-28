@@ -1,0 +1,17 @@
+@use "sass:color";
+@use '../../../styles' as *;
+
+.container {
+  padding: 2rem;
+  border-radius: 0.5rem;
+
+  .form-select {
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+
+    &:focus {
+      border-color: $accent-color;
+      box-shadow: 0 0 0 0.2rem color.scale($accent-color, $alpha: -50%);
+    }
+  }
+}

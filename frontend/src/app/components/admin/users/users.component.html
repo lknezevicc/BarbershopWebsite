@@ -1,0 +1,99 @@
+<div class="container mt-5 shadow">
+  <h2 class="mb-4 text-center">Users Dashboard</h2>
+  <div class="mb-3">
+    <select id="roleFilter" class="form-select" [(ngModel)]="roleFilter">
+      <option value="">All</option>
+      <option value="admin">Admin</option>
+      <option value="user">User</option>
+    </select>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th (click)="setSortField('firstName')">First Name</th>
+          <th (click)="setSortField('lastName')">Last Name</th>
+          <th (click)="setSortField('email')">Email</th>
+          <th (click)="setSortField('phone')">Phone</th>
+          <th (click)="setSortField('role')">Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr *ngFor="let user of users | sort:sortField:sortOrder | filter:roleFilter:'role'" (click)="viewUserHistory(user._id)" style="cursor: pointer;">
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button
+              class="btn btn-warning btn-sm me-1 mb-1"
+              (click)="openEditModal(user); $event.stopPropagation()">Edit</button>
+            <button
+              class="btn btn-danger btn-sm me-1 mb-1"
+              (click)="deleteUser(user._id); $event.stopPropagation()">Delete</button>
+            <button
+              class="btn btn-primary btn-sm me-1 mb-1"
+              (click)="changeUserRole(user._id, 'admin'); $event.stopPropagation()"
+              *ngIf="user.role !== 'admin'">Make Admin</button>
+            <button
+              class="btn btn-secondary btn-sm me-1 mb-1"
+              (click)="changeUserRole(user._id, 'user'); $event.stopPropagation()"
+              *ngIf="user.role === 'admin'">Make User</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal" tabindex="-1" [ngClass]="{'show d-block': showModal}" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit User</h5>
+          <button type="button" class="btn-close" (click)="closeEditModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="userForm" (ngSubmit)="onEditUser()">
+            <div class="form-group mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" id="firstName" class="form-control" formControlName="firstName">
+              <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback d-block">
+                <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
+                <div *ngIf="f['firstName'].errors['minlength']">The first name must be at least 2 characters long.</div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" id="lastName" class="form-control" formControlName="lastName">
+              <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback d-block">
+                <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
+                <div *ngIf="f['lastName'].errors['minlength']">The last name must be at least 2 characters long.</div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" class="form-control" formControlName="email">
+              <div *ngIf="submitted && f['email'].errors" class="invalid-feedback d-block">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                <div *ngIf="f['email'].errors['email']">Email must be a valid email address</div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="text" id="phone" class="form-control" formControlName="phone">
+              <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback d-block">
+                <div *ngIf="f['phone'].errors['required']">Phone is required</div>
+                <div *ngIf="f['phone'].errors['pattern']">Phone must be a valid phone number</div>
+              </div>
+            </div>
+            <div class="d-grid">
+              <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

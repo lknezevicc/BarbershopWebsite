@@ -1,0 +1,68 @@
+@use "sass:color";
+
+$background-color: #fdfdfd;
+$accent-color: #d4af37;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn-warning {
+  background-color: #ffc107;
+  color: $background-color;
+  border: none;
+
+  &:hover {
+    background-color: color.adjust(#ffc107, $lightness: -10%);
+  }
+}
+
+.btn-danger {
+  border: none;
+
+  &:hover {
+    background-color: color.adjust(#dc3545, $lightness: -10%);
+  }
+}
+
+.btn-primary {
+  background-color: $accent-color;
+  border: none;
+
+  &:hover {
+    background-color: color.adjust($accent-color, $lightness: -10%);
+  }
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+
+  &:hover {
+    background-color: color.adjust(#6c757d, $lightness: -10%);
+  }
+}
+
+.table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  thead {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  tbody tr {
+    vertical-align: middle;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #e9ecef;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+  }
+}

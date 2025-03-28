@@ -1,0 +1,56 @@
+<div class="container mt-5 shadow">
+  <div class="text-center">
+    <h2 class="mb-4">Services</h2>
+    <button class="btn btn-primary mb-3" (click)="openAddModal()">Add Service</button>
+  </div>
+  <table class="table table-striped shadow-sm">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th style="width: 10%;">Price (EUR)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <tr *ngFor="let service of services">
+        <td>{{ service.name }}</td>
+        <td>{{ service.description }}</td>
+        <td>{{ service.price }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-1 mb-1" (click)="openEditModal(service)">Edit</button>
+          <button class="btn btn-danger btn-sm mb-1" (click)="deleteService(service._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add/Edit Service Modal -->
+  <div class="modal" tabindex="-1" [ngClass]="{'show d-block': showModal}" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="serviceModalLabel">{{ isEditMode ? 'Edit Service' : 'Add Service' }}</h5>
+          <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input id="name" formControlName="name" class="form-control" />
+            </div>
+            <div class="form-group mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea id="description" formControlName="description" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="form-group mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input id="price" formControlName="price" type="number" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="serviceForm.invalid">{{ isEditMode ? 'Update' : 'Add' }}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
